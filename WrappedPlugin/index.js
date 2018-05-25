@@ -155,12 +155,12 @@ const wrapHooks = (orig, pluginName, smp, type) => {
 };
 
 const construcNamesToWrap = [
-  "Compiler",
-  "Compilation",
-  "MainTemplate",
-  "Parser",
-  "NormalModuleFactory",
-  "ContextModuleFactory",
+  "compiler",
+  "compilation",
+  "mainTemplate",
+  "parser",
+  "normalmodulefactory",
+  "contextmodulefactory",
 ];
 
 const wrappedObjs = [];
@@ -174,7 +174,7 @@ const wrap = (orig, pluginName, smp, addEndEvent) => {
   const getOrigConstrucName = target =>
     target && target.constructor && target.constructor.name;
   const getShouldWrap = target => {
-    const origConstrucName = getOrigConstrucName(target);
+    const origConstrucName = getOrigConstrucName(target).toLowerCase();
     return construcNamesToWrap.includes(origConstrucName);
   };
   const shouldWrap = getShouldWrap(orig);
