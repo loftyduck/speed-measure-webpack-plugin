@@ -157,7 +157,7 @@ const wrapHooks = (orig, pluginName, smp, type) => {
 const construcNamesToWrap = [
   "compiler",
   "compilation",
-  "mainTemplate",
+  "maintemplate",
   "parser",
   "normalmodulefactory",
   "contextmodulefactory",
@@ -172,9 +172,9 @@ const wrap = (orig, pluginName, smp, addEndEvent) => {
   if (prevWrapped) return prevWrapped.wrapped;
 
   const getOrigConstrucName = target =>
-    target && target.constructor && target.constructor.name;
+    target && target.constructor && target.constructor.name && target.constructor.name.toLowerCase();
   const getShouldWrap = target => {
-    const origConstrucName = getOrigConstrucName(target).toLowerCase();
+    const origConstrucName = getOrigConstrucName(target);
     return construcNamesToWrap.includes(origConstrucName);
   };
   const shouldWrap = getShouldWrap(orig);
